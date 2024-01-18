@@ -1,0 +1,45 @@
+<ion-content [fullscreen]="true" class="login-container">
+  <img src="assets/urbanizacionBg.jpg" alt="Fondo" class="background-image" />
+
+  <div [class]="'ion-padding ' + (isMobile ? 'content-login':'content-login-web')">
+    <div class="logo">
+      <img src="assets/logo-color.svg" alt="logo" />
+    </div>
+    <form class="form-credentials" [formGroup]="signInForm">
+      <!-- INPUT USERNAME -->
+      <shared-input
+        [startIcon]="'person-outline'"
+        [type]="'text'"
+        [pattern]="'^[a-zA-Z0-9\-_.]*'"
+        [maxlength]="14"
+        [minlength]="3"
+        [placeholder]="'Usuario'"
+        [setFocus]="setFocusUsername"
+        (controlValueChange)="controlValueChangeUsername($event)"
+      ></shared-input>
+
+      <!-- INPUT PASSWORD -->
+      <shared-input
+        [startIcon]="'lock-closed-outline'"
+        [type]="'password'"
+        [maxlength]="14"
+        [isPassword]="true"
+        [minlength]="3"
+        [placeholder]="'Contraseña'"
+        [setFocus]="setFocusPassword"
+        (controlValueChange)="controlValueChangePassword($event)"
+      ></shared-input>
+
+      <div class="btn-iniciar-sesion">
+        <shared-button 
+          [label]="'Iniciar sesión'"
+          (click)="signIn()"
+          [isLoading]="isLoading">
+        </shared-button>
+      </div>
+      <div class="forgot-password">
+        <a (click)="goToRecoveryPassword()">¿Ha olvidado su contraseña?</a>
+      </div>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,15 @@
+<ion-item>
+  <ion-label [position]="labelPosition" *ngIf="label!='' && !isPassword">{{label}}</ion-label>
+  <ion-icon [name]="startIcon" *ngIf="startIcon"></ion-icon>
+  <ion-input
+    #inputTag
+    [type]="type"
+    [formControl]="formControl"
+    [placeholder]="placeholder"
+    [maxlength]="maxlength"
+    [minlength]="minlength"
+    class="input"
+  ></ion-input>
+  <ion-icon (click)="togglePasswordVisibility()" [name]="showPasswordIcon" *ngIf="isPassword"></ion-icon>
+  <ion-icon [name]="endIcon" *ngIf="endIcon"></ion-icon>
+</ion-item>
