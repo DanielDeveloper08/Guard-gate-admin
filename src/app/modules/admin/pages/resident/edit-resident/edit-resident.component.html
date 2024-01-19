@@ -41,7 +41,7 @@
         <ion-col size="12" size-md="12">
           <ion-grid>
             <ion-row>
-              <ion-col size="12" size-md="6" *ngFor="let residence of userData.residences">
+              <ion-col size="12" size-md="6" *ngFor="let residence of userData.residences;let i=index">
                 <ion-card class="house-card">
                   <div class="item-field">
                     <span class="title"><b>N°: </b></span><span>{{residence.num}}</span>
@@ -53,18 +53,16 @@
                     <span class="title"><b>Villa: </b></span><span>{{ residence.town }}</span>
                   </div>
                   <div class="actions-container">
-                    <ion-button>
+                    <ion-button (click)="editResidence(i)">
                       <ion-icon
                         name="create-outline"
                         size="medium"
-                        [routerLink]="['/admin/edit-resident']"
                       />
                     </ion-button>
-                    <ion-button color="light">
-                      <ion-icon
+                    <ion-button (click)="deleteResidenceAlert(residence.id, i)" color="light">
+                      <ion-icon 
                         name="trash-outline"
                         size="medium"
-                        [routerLink]="['/admin/edit-resident']"
                       />
                     </ion-button>
                   </div>
@@ -87,49 +85,48 @@
       <div id="residence-modal" class="container-modal ion-padding">
         <ion-buttons slot="start">
           <ion-back-button (click)="closeModal()" [defaultHref]="'/admin/edit-resident/'+idResident"></ion-back-button>
-          <ion-title>Agregar residencia</ion-title>
+          <ion-title>{{editing?'Editar':'Agregar'}} residencia</ion-title>
         </ion-buttons>
         <div class="column-content">
           <div class="column-content">
             <shared-input
-            [type]="'text'"
-            [maxlength]="50"
-            [minlength]="3"
-            label="Número:"
-            labelPosition="floating"
-            ></shared-input>
-          </div>
-          <div class="column-content">
-            <shared-input
               [type]="'text'"
               [maxlength]="50"
-              [minlength]="3"
+              [minlength]="1"
               label="Manzana:"
+              [pattern]="'^[a-zA-Z0-9 ]*$'"
               labelPosition="floating"
+              [value]="residenceForm.get('block')?.value"
+              (controlValueChange)="controlValueChange($event,'block')"
             ></shared-input>
           </div>
           <div class="column-content">
             <shared-input
               [type]="'text'"
               [maxlength]="50"
-              [minlength]="3"
+              [minlength]="1"
+              [pattern]="'^[a-zA-Z0-9 ]*$'"
               label="Villa:"
               labelPosition="floating"
+              [value]="residenceForm.get('town')?.value"
+              (controlValueChange)="controlValueChange($event,'town')"
             ></shared-input>
           </div>
           <div class="column-content">
             <shared-input
               [type]="'text'"
-              [pattern]="'^[0-9]*$'"
-              [maxlength]="10"
-              [minlength]="10"
+              [pattern]="'^[a-zA-Z0-9 ]*$'"
+              [maxlength]="50"
+              [minlength]="1"
               label="Urbanización:"
               labelPosition="floating"
+              [value]="residenceForm.get('urbanization')?.value"
+              (controlValueChange)="controlValueChange($event,'urbanization')"
             ></shared-input>
           </div>
           <div class="new-residence">
             <ion-toolbar>
-              <ion-button slot="end">Agregar</ion-button>
+              <ion-button (click)="saveChanges()" slot="end">Agregar</ion-button>
             </ion-toolbar>
          </div>
         </div>
