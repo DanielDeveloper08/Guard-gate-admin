@@ -74,7 +74,7 @@
                   <span><b>Agregar Residencia</b></span>
                 </ion-button>
               </ion-col> -->
-              <ion-col size="12">
+              <ion-col *ngIf="userData.residences.length==0" size="12">
                 <ion-title class="ion-text-center">El residente no tiene residencias agregadas.</ion-title>
               </ion-col>
             </ion-row>
