@@ -112,6 +112,14 @@
                 (controlValueChange)="controlValueChange($event,'passwordConfirm')"
                 ></shared-input>
               </div>
+              <div *ngIf="editing" class="column-content">
+                <shared-select label="Estado"
+                  labelPosition="floating"
+                  [options]="[{optionName:'Activo',optionValue:'true'},{optionName:'Inactivo',optionValue:'false'}]"
+                  [value]="this.userForm.get('status')?.value.toString()"
+                  (controlValueChange)="controlValueChange($event,'status')"
+                ></shared-select>
+              </div>
             </ion-col>
           </ion-row>
         </ion-grid>

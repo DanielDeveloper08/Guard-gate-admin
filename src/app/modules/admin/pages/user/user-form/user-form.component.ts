@@ -32,7 +32,7 @@ export class UserFormComponent implements OnInit {
   roleOptions:{optionValue:string , optionName:string}[];
   nameRegex:string='^[a-zA-Z]+(?:\\s[a-zA-Z]+)*\\s?$';
   fullEmailRegex:string='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
-  passwordRegex:string='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
+  passwordRegex:string='^(?=.*[!@#$%^&*()_+{}:;<>,.?~-])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
 
   constructor(private route: ActivatedRoute, private router:Router) {
     this.id='';
@@ -83,8 +83,11 @@ export class UserFormComponent implements OnInit {
   }
 
   public registerUser() {
+    const userFormValues=this.userForm.value;
+    delete userFormValues.status;
+
     this._userService.registerUser(
-      this.userForm.value
+      userFormValues
       ).subscribe({
       next: (res) => {
         this.userForm.patchValue(res.data);
@@ -166,7 +169,8 @@ export class UserFormComponent implements OnInit {
       names: ['', Validators.required],
       surnames: ['', Validators.required],
       email: ['', Validators.required],
-      phone: ['', Validators.required]
+      phone: ['', Validators.required],
+      status: ['true', Validators.required],
     });
   }
 

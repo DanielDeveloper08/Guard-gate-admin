@@ -9,6 +9,7 @@ export interface IUser {
   phone: string;
   role: string;
   residences: IResidenceByUser[];
+  status:boolean;
 }
 
 export interface IResidenceByUser {
