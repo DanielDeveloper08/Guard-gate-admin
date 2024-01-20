@@ -15,8 +15,6 @@ import { ResidentService } from '../../../services/resident.service';
 })
 export class ListResidentComponent implements OnInit {
 
-  private _roleService = inject(RoleService);
-  private _toastService = inject(ToastService);
   private _residentService = inject(ResidentService);
 
 
@@ -24,7 +22,7 @@ export class ListResidentComponent implements OnInit {
   private sub: any;
   residents:IResident[]=[];
 
-  constructor(private route: ActivatedRoute, private router:Router) {
+  constructor(private route: ActivatedRoute) {
     this.filterText='';
     this.residents=[];
   }
@@ -32,7 +30,7 @@ export class ListResidentComponent implements OnInit {
   ngOnInit() {
 
     this.getRedicents();
-    this.sub = this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe(() => {
        //this.name = params['name'];
        //this.getRole(this.name);
     });
@@ -46,7 +44,6 @@ export class ListResidentComponent implements OnInit {
     this._residentService.getResidents().subscribe({
       next: (res) => {
         this.residents = res.data;
-        console.log(res.data)
       }
     });
   }
