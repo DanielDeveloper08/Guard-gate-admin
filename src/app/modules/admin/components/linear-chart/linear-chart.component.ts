@@ -24,6 +24,7 @@ export class LinearChartComponent implements OnInit {
   createLineChart() {
     let labels:string[] = [];
     let data:number[] = [];
+    console.log(this.data)
     while (this.fromDate <= this.toDate) {
       labels.push(this.datePipe.transform(this.fromDate,'yyyy-MM-dd') || '');
       const datum = this.data.find(datum=>this.datePipe.transform(datum.date,'yyyy-MM-dd')==this.datePipe.transform(this.fromDate,'yyyy-MM-dd'));
@@ -34,9 +35,9 @@ export class LinearChartComponent implements OnInit {
         data.push(0);
       }
       this.fromDate.setDate(this.fromDate.getDate() + 1);
-
+      
     }
-
+    
 
     this.lineChart = new Chart('linearChart', {
       type: 'line',
@@ -46,7 +47,7 @@ export class LinearChartComponent implements OnInit {
           label: 'Cantidad de Visitas',
           data: data,
           fill: false,
-          borderColor: 'rgba(75, 192, 192, 1)',
+          borderColor: 'rgba(75, 192, 192, 1)', 
           borderWidth: 1
         }]
       },

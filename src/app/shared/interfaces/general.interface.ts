@@ -11,10 +11,10 @@ export enum RoleTypeEnum {
 }
 
 export enum VisitStatusEnum {
-  PENDING = 'PENDIENTE', // Initial State
-  FULFILLED = 'COMPLETADA', // Sensor
-  CANCELLED = 'CANCELADA', // Resident
-  IN_PROGRESS = 'EN CURSO', // Sensor
+  PENDING = 'PENDIENTE',      // Initial State
+  FULFILLED = 'COMPLETADA',   // Sensor
+  CANCELLED = 'CANCELADA',    // Resident
+  IN_PROGRESS = 'EN CURSO',   // Sensor
 }
 
 export interface IGeneralResponsePagination {
@@ -40,5 +40,5 @@ export enum ButtonStyle {
   Secondary = 'secondary',
   Danger = 'danger',
   Outline = 'outline',
-  Danger_Outline = 'outline-danger',
+  Danger_Outline = 'outline-danger'
 }

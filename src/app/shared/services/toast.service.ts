@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Position } from '../interfaces';
+import { AnimationBuilder } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class ToastService {
     message: string,
     position: Position = Position.Bottom,
     color: string = 'primary',
-    icon: string = 'information-circle'
+    icon: string = 'information-circle' // Icono por defecto
   ) {
     const toast = await this.toastController.create({
       message: message,

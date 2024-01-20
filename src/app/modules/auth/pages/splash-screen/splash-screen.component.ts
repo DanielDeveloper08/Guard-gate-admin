@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./splash-screen.component.scss'],
 })
 export class SplashScreenComponent {
+
   constructor(private router: Router) {}
 
   ngAfterViewInit() {

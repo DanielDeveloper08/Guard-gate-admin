@@ -23,4 +23,4 @@ import { FormOtpComponent } from './components/form-otp/form-otp.component';
     FormOtpComponent
   ]
 })
-export class AuthModule {}
+export class AuthModule { }

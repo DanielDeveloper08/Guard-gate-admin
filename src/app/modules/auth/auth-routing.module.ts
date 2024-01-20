@@ -1,8 +1,8 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from "@angular/router";
 import { PasswordRecoveryComponent } from './pages/password-recovery/password-recovery.component';
-import { NgModule } from '@angular/core';
-import { SplashScreenComponent } from './pages/splash-screen/splash-screen.component';
-import { LoginComponent } from './pages/login/login.component';
+import { NgModule } from "@angular/core";
+import { SplashScreenComponent } from "./pages/splash-screen/splash-screen.component";
+import { LoginComponent } from "./pages/login/login.component";
 
 const routes: Routes = [
   {
@@ -19,10 +19,11 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: '/login' }
+
 ];
 
 @NgModule({

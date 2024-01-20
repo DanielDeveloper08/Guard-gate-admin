@@ -7,6 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { LoginService } from '../services/login.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class AuthGuard implements CanActivate {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      this._router.navigateByUrl('/');
+      this._router.navigateByUrl('/login');
       return false;
     }
 

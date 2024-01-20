@@ -1,14 +1,13 @@
-@import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "primeng/resources/primeng.min.css";
-@import "primeicons/primeicons.css";
+@import 'primeng/resources/themes/lara-light-blue/theme.css';
+@import 'primeng/resources/primeng.min.css';
+@import 'primeicons/primeicons.css';
 
-@import "theme/mixins";
-
+@import 'theme/mixins';
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 html,
@@ -20,58 +19,57 @@ body {
 
 $primary-color: #3880ff;
 
-.small-form-container {
+.small-form-container{
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  ion-card {
-    width: 95%;
-    padding: 1rem;
-    @include sm {
-      width: 75%;
+  ion-card{
+      width: 95%;
+      padding: 1rem;
+      @include sm{
+        width: 75%;
     }
-    @include md {
-      width: 50%;
-    }
-    @include xl {
-      width: 30%;
-    }
+      @include md{
+          width: 50%;
+      }
+      @include xl{
+          width: 30%;
+      }
   }
 }
 
-.large-form-container {
+.large-form-container{
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  ion-card {
-    width: 95%;
-    padding: 1rem;
-    margin-top: 1rem;
-    @include sm {
+  ion-card{
       width: 95%;
-    }
-    @include md {
-      width: 75%;
-    }
-    @include xl {
-      width: 50%;
-    }
+      padding: 1rem;
+      margin-top: 1rem;
+      @include sm{
+        width: 95%;
+      }
+      @include md{
+          width: 75%;
+      }
+      @include xl{
+          width: 50%;
+      }
   }
 }
-
-.custom-table-container {
+.custom-table-container{
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.table-filter-container {
+.table-filter-container{
   width: 100%;
   padding: 1rem;
 }
+

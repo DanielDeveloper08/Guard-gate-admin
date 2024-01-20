@@ -2,12 +2,13 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { IonInput } from '@ionic/angular';
-import { FormControl, ValidatorFn } from '@angular/forms';
+import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'shared-input',

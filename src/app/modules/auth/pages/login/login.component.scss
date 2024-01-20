@@ -1,22 +1,23 @@
-@import "src/theme/_mixins.scss";
+  @import 'src/theme/_mixins.scss';
+  
+  ion-content::part(scroll) {
+    color: #fff;
+  }
 
-ion-content::part(scroll) {
-  color: #fff;
-}
-
+  
 .background-image {
   position: absolute;
   z-index: -1;
 
-  @include md {
+  @include md{
     width: 100%;
     height: 100vh;
     top: 0;
   }
 }
 
-.login-container {
-  @include md {
+.login-container{
+  @include md{
     position: relative;
   }
 }
@@ -25,12 +26,12 @@ ion-content::part(scroll) {
   border-radius: 1.25rem 1.25rem 0 0;
   margin-top: 70%;
   background-color: white;
-  max-height: calc(100% - 70%);
+  max-height:calc(100% - 70%);
   height: calc(100% - 70%);
   display: flex;
   flex-direction: column;
   gap: 32px;
-
+  
   .logo {
     margin-top: 1.5rem;
     display: flex;
@@ -43,8 +44,8 @@ ion-content::part(scroll) {
 
   .form-credentials {
     ion-item {
-      ion-icon {
-        margin-right: 0.5rem;
+      ion-icon{
+        margin-right: .5rem;
       }
       --background: #f1f1f1;
       border-radius: 0.75rem;
@@ -66,23 +67,23 @@ ion-content::part(scroll) {
   }
 }
 
-.content-login-web {
+.content-login-web{
   @include content-login;
-  @include md {
+  @include md{
     position: relative;
-    top: 25%;
+    top:25%;
     z-index: 2;
     width: 50%;
     margin: auto;
-    height: auto;
+    height:auto;
     max-height: 100%;
     border-radius: 1.25rem 1.25rem 1.25rem 1.25rem;
   }
-  @include xl {
+  @include xl{
     width: 30%;
   }
 }
 
-.content-login {
+.content-login{
   @include content-login;
 }

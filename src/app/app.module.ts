@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { IonicModule } from '@ionic/angular';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-import { InterceptorService } from './shared/services/interceptor';
 
+import { AppRoutingModule } from './app.routing';
+import { AppComponent } from './app.component';
+import { IonicModule } from '@ionic/angular';
+import { SharedModule } from './shared/shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './shared/services/interceptor';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent
@@ -14,8 +16,9 @@ import { InterceptorService } from './shared/services/interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     IonicModule.forRoot(),
+    SharedModule,
+    NoopAnimationsModule,
   ],
   providers: [
     {
