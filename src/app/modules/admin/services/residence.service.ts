@@ -24,6 +24,18 @@ export class ResidenceService{
     }
 
     /**
+   * Set main residence
+   * @param residenceId
+   * @returns
+   */
+    setMainResidence(residenceId:number): Observable<IGeneralResponse<string>> {
+        return this._httpClient.patch<IGeneralResponse<string>>(
+            `${this.urlBase}//users/main-residency?residencyId=${residenceId}`,
+            null
+        );
+    }
+
+    /**
    * Update residence
    * @param residenceId
    * @param params

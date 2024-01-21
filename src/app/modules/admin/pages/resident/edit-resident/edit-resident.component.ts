@@ -124,6 +124,19 @@ export class EditResidentComponent implements OnInit {
     });
   }
 
+  private setMainResidence(residenceId:number) {
+
+    this._residenceService.setMainResidence(residenceId).subscribe({
+      next: (res) => {
+        this.getResidentWithHomes();
+        this._toastService.showSuccess(res.message, Position.Top);
+      },
+      error:(err)=>{
+        this._toastService.showError(err.error.message, Position.Top);
+      }
+    });
+  }
+
   private createResidence() {
 
     this._residenceService.createResidence(
@@ -171,6 +184,29 @@ export class EditResidentComponent implements OnInit {
           text: 'Sí',
           handler: () => {
             this.deleteResidence(residenceId);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async setMainResidenceAlert(residenceId:number, residenceIndex:number) {
+    const alert = await this.alertController.create({
+      header: 'Confirmación',
+      message: `¿Está seguro de que desea establecer la residencia Manzana ${this.userData.residences[residenceIndex].block} Villa ${this.userData.residences[residenceIndex].town} como principal?`,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Sí',
+          handler: () => {
+            this.setMainResidence(residenceId);
           }
         }
       ]

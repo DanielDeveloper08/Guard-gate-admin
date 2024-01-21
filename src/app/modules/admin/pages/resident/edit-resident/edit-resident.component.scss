@@ -1,4 +1,5 @@
 
+@import 'src/theme/_mixins.scss';
 
 .container-edit-resident{
     display: flex;
@@ -106,7 +107,12 @@ ion-grid{
     justify-content: end;
     margin-top: 1rem;
     ion-button{
-        margin-right: 1rem;
+        margin-right: 0.25rem;
+    }
+    @include sm{
+        ion-button{
+            margin-right: 1rem;
+        }
     }
 }
 
