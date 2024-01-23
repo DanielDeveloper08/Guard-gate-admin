@@ -77,25 +77,15 @@ export class LoginComponent implements OnInit {
           if (res.data.user) {
             const { token, user } = res.data;
 
-            localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify(user));
+            if (user.role === RoleTypeEnum.ADMIN) {
+              localStorage.setItem("token", token);
+              localStorage.setItem("user", JSON.stringify(user));
 
-            let navigatePath: string;
+              location.reload();
 
-            switch (user.role) {
-              case RoleTypeEnum.ADMIN:
-                navigatePath = '/admin';
-                break;
-
-              case RoleTypeEnum.OPERATIONAL:
-                navigatePath = '/guard-gate/tabs/scanner';
-                break;
-
-              default:
-                navigatePath = '/guard-gate';
+              return;
             }
 
-            this._navCtrl.navigateRoot(navigatePath);
             this.isLoading = false;
           }
         },
