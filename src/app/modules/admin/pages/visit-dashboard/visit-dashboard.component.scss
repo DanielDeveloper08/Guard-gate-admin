@@ -8,18 +8,26 @@ h1{
     text-align: center;
     margin: 2rem;
 }
+
+.statistics-header{
+    width: 90%;
+    margin: 0 auto;
+}
 .statistics-container{
     display: flex;
-    align-items: center;
-    gap:1rem;
-    width: 100%;
-    flex-direction: column;
+
+    gap:2rem;
+    max-width: 90%;
+    flex-direction: row;
+    margin: 0 auto;
+    margin-top: 2rem;
 }
 
 #doughnut-chart-card{
     width: 95%;
     @include sm{
         width: 50%;
+        margin: 0 auto;
     }
 }
 

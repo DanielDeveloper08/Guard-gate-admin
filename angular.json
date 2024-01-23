@@ -36,6 +36,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
               {
                 "input": "node_modules/primeng/resources/themes/lara-light-blue/theme.css"
               },

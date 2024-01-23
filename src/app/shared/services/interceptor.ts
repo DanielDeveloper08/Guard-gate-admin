@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpEvent,
@@ -6,9 +6,16 @@ import {
   HttpRequest,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, catchError, finalize, map, throwError } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  finalize,
+  map,
+  throwError,
+} from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/modules/auth/services/login.service';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,21 +23,21 @@ import { LoginService } from 'src/app/modules/auth/services/login.service';
 export class InterceptorService implements HttpInterceptor {
   private countRequest = 0;
 
-  private _loginService = inject(LoginService);
-
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private loadingService: LoadingService
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!this.countRequest) {
-      // this.sharedLibService.setIsloading(true);
-    }
+    this.loadingService.showLoading();
+
     this.countRequest++;
 
-    // const token = this.loginService.getToken();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
 
     if (token) {
       if (!req.headers.has('service')) {
@@ -39,33 +46,27 @@ export class InterceptorService implements HttpInterceptor {
         });
       }
     }
+
     return next.handle(req).pipe(
       finalize(() => {
         this.countRequest--;
+
         if (!this.countRequest) {
-          // this.sharedLibService.setIsloading(false);
+          this.loadingService.hideLoading();
         }
       }),
-      map((event: HttpEvent<any>) => {
-        return event;
-      }),
+      map((event: HttpEvent<any>) => event),
       catchError((err: HttpErrorResponse) => {
         if (err.ok === false) {
           if (!req.headers.has('service')) {
-            // this.toastrService.error(
-            //   err.error.message
-            //     ? err.error.message
-            //     : 'Ha ocurrido un error inesperado...',
-            //   'Error'
-            // );
+            // Tratar error
           }
         }
 
         // Token caducado
         if (err.status === 401) {
           if (!req.headers.has('service')) {
-
-            this._loginService.logout();
+            this.loginService.logout();
             // TERMINAR CUALQUIER INSTANCIA
           }
         }

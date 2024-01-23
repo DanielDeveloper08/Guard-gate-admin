@@ -72,10 +72,10 @@ export class EditRoleComponent implements OnInit {
       }
       ).subscribe({
       next: (res) => {
-        this._toastService.showSuccess(res.data, Position.Top);
+        this._toastService.showSuccess(res.data  );
       },
       error:(err)=>{
-        this._toastService.showError(err.error.message, Position.Top);
+        this._toastService.showError(err.error.message  );
       }
     });
   }

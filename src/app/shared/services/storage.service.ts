@@ -26,7 +26,7 @@ export class StorageService {
       const downloadURL = await getDownloadURL(snapshot.ref);
       return downloadURL;
     } catch (error) {
-      this._toastService.showError('Error al subir el archivo', Position.Top);
+      this._toastService.showError('Error al subir el archivo'  );
       return undefined;
     }
   }

@@ -9,11 +9,11 @@ import {
 import { NavController } from '@ionic/angular';
 import { LoginService } from '../../services/login.service';
 import { ToastService } from 'src/app/shared/services';
-import { Position } from 'src/app/shared/interfaces';
 import { NavigationOptions } from '@ionic/angular/common/providers/nav-controller';
 import { ILoginRequest } from '../../interfaces/auth.interface';
 import { Platform } from '@ionic/angular';
 import { RoleTypeEnum } from 'src/app/shared/interfaces/general.interface';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -72,7 +72,9 @@ export class LoginComponent implements OnInit {
     } else if (credentials.password === '') {
       this.setFocusPassword = true;
     } else {
-      this._loginService.signIn(credentials).subscribe({
+      this._loginService
+      .signIn(credentials)
+      .subscribe({
         next: (res) => {
           if (res.data.user) {
             const { token, user } = res.data;
@@ -86,12 +88,15 @@ export class LoginComponent implements OnInit {
               return;
             }
 
+            this._toastService.showError('Usuario y/o contraseña incorrecta');
+
+
             this.isLoading = false;
           }
         },
         error: (err:any) => {
           this.isLoading = false;
-          this._toastService.showError(err.error.message, Position.Top);
+          this._toastService.showError(err.error.message);
         }
       });
     }

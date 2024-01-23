@@ -28,9 +28,9 @@ export class ResidenceService{
    * @param residenceId
    * @returns
    */
-    setMainResidence(residenceId:number): Observable<IGeneralResponse<string>> {
+    setMainResidence(residenceId:number, userId: number): Observable<IGeneralResponse<string>> {
         return this._httpClient.patch<IGeneralResponse<string>>(
-            `${this.urlBase}//users/main-residency?residencyId=${residenceId}`,
+            `${this.urlBase}/users/main-residency?residencyId=${residenceId}&userId=${userId}`,
             null
         );
     }

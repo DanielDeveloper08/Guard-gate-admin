@@ -90,10 +90,10 @@ export class EditResidenceComponent implements OnInit {
         this.editing=true;
         this.userForm.get('password')?.disable();
         this.userForm.get('passwordConfirm')?.disable();
-        this._toastService.showSuccess(res.message, Position.Top);
+        this._toastService.showSuccess(res.message  );
       },
       error:(err)=>{
-        this._toastService.showError(err.error.message, Position.Top);
+        this._toastService.showError(err.error.message  );
       }
     });
   }
@@ -107,10 +107,10 @@ export class EditResidenceComponent implements OnInit {
         ...userFormValues
       }).subscribe({
       next: (res) => {
-        this._toastService.showSuccess(res.message, Position.Top);
+        this._toastService.showSuccess(res.message  );
       },
       error:(err)=>{
-        this._toastService.showError(err.error.message, Position.Top);
+        this._toastService.showError(err.error.message  );
       }
     });
   }
@@ -133,23 +133,23 @@ export class EditResidenceComponent implements OnInit {
   validateForm():boolean{
     const passwordRegExp = new RegExp(this.passwordRegex);
     if (!passwordRegExp.test(this.userForm.get('password')?.value) && !this.editing) {
-      this._toastService.showError('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un caracter especial.', Position.Top);
+      this._toastService.showError('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un caracter especial.'  );
       return false;
     }
 
     if(this.userForm.get('passwordConfirm')?.value!=this.userForm.get('password')?.value && !this.editing){
-      this._toastService.showError('Las contraseñas no coinciden.', Position.Top);
+      this._toastService.showError('Las contraseñas no coinciden.'  );
       return false;
     }
 
     if(!this.userForm.valid){
-      this._toastService.showError('Debe llenar todos los campos correctamente.', Position.Top);
+      this._toastService.showError('Debe llenar todos los campos correctamente.'  );
       return false;
     }
 
     const emailRegExp = new RegExp(this.fullEmailRegex);
     if (!emailRegExp.test(this.userForm.get('email')?.value)) {
-      this._toastService.showError('Debe ingresar un email válido.', Position.Top);
+      this._toastService.showError('Debe ingresar un email válido.'  );
       return false;
     }
 

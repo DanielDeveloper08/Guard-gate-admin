@@ -62,13 +62,13 @@ export class PasswordRecoveryComponent implements OnInit {
         next: (res) => {
           if (res.statusCode == 200) {
             this.modal.present();
-            this._toastService.showInfo(res.data, Position.Top);
+            this._toastService.showInfo(res.data  );
           }
           this.isLoadingRecoveryPassword = false;
         },
         error: (err: HttpErrorResponse) => {
           this.isLoadingRecoveryPassword = false;
-          this._toastService.showError(err.error.message, Position.Top);
+          this._toastService.showError(err.error.message  );
         },
       });
     }
@@ -95,7 +95,7 @@ export class PasswordRecoveryComponent implements OnInit {
         },
         error: (err: HttpErrorResponse) => {
           this.isLoadingOtp = false;
-          this._toastService.showError(err.error.message, Position.Top);
+          this._toastService.showError(err.error.message  );
         },
       });
     }
@@ -113,7 +113,7 @@ export class PasswordRecoveryComponent implements OnInit {
         next: (res) => {
           if (res.statusCode == 200) {
             this.isLoadingNewPassword = false;
-            this._toastService.showSuccess(res.data, Position.Top);
+            this._toastService.showSuccess(res.data  );
             const navigationOptions: NavigationOptions = {
               animated: true,
             };
@@ -122,7 +122,7 @@ export class PasswordRecoveryComponent implements OnInit {
         },
         error: (err: HttpErrorResponse) => {
           this.isLoadingNewPassword = false;
-          this._toastService.showError(err.error.message, Position.Top);
+          this._toastService.showError(err.error.message  );
         },
       });
       this.modal.dismiss();

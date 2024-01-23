@@ -26,7 +26,7 @@ export class NoAuthGuard implements CanActivate {
     const token = localStorage.getItem('token');
 
     if (token) {
-      this.router.navigateByUrl('/guard-gate/home');
+      this.router.navigateByUrl('/admin');
       return false;
     }
 

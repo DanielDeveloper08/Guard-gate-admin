@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true" class="login-container">
   <img src="assets/urbanizacionBg.jpg" alt="Fondo" class="background-image" />
-
+  <shared-loading-splash *ngIf="isLoading"></shared-loading-splash>
   <div [class]="'ion-padding ' + (isMobile ? 'content-login':'content-login-web')">
     <div class="logo">
       <img src="assets/logo-color.svg" alt="logo" />
@@ -31,10 +31,9 @@
       ></shared-input>
 
       <div class="btn-iniciar-sesion">
-        <shared-button 
+        <shared-button
           [label]="'Iniciar sesión'"
-          (click)="signIn()"
-          [isLoading]="isLoading">
+          (click)="signIn()">
         </shared-button>
       </div>
       <div class="forgot-password">

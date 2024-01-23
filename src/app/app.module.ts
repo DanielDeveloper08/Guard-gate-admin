@@ -8,7 +8,8 @@ import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './shared/services/interceptor';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { environment } from 'src/environments/environment';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -19,6 +20,7 @@ import { environment } from 'src/environments/environment';
     IonicModule.forRoot(),
     SharedModule,
     NoopAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {

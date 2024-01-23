@@ -18,6 +18,7 @@ import { InitialsVisitorPipe } from './pipes/InitialsVisitor.pipe';
 import { SelectComponent } from './components/select/select.component';
 import { SkeletonItemVisitorComponent } from './components/skeleton-item-visitor/skeleton-item-visitor.component';
 import { AccessTagComponent } from './components/access-tag/access-tag.component';
+import { LoadingSplashComponent } from './components/loading-splash/loading-splash.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { AccessTagComponent } from './components/access-tag/access-tag.component
     InitialsVisitorPipe,
     SkeletonItemVisitorComponent,
     AccessTagComponent,
+    LoadingSplashComponent
   ],
   declarations: [
     OtpComponent,
@@ -64,6 +66,7 @@ import { AccessTagComponent } from './components/access-tag/access-tag.component
     InitialsVisitorPipe,
     SkeletonItemVisitorComponent,
     AccessTagComponent,
+    LoadingSplashComponent
   ]
 })
 export class SharedModule { }

@@ -51,7 +51,7 @@ export class FormNewPasswordComponent implements OnInit {
     }else{
       //VALIDAR SI LAS CONTRASENAS SON IGUALES
       if(this.passwordForm.get('newPassword')?.value != this.passwordForm.get('confirmPassword')?.value){
-        this._toastService.showError("Contraseñas no coinciden", Position.Top);
+        this._toastService.showError("Contraseñas no coinciden"  );
       }else{
         this.setNewPassword.emit({eventClick: true, newPassword: this.passwordForm.get('newPassword')?.value});
       }

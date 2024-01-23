@@ -101,12 +101,12 @@ export class EditResidentComponent implements OnInit {
         ...this.residenceForm.value
       }).subscribe({
       next: (res) => {
-        this._toastService.showSuccess(res.message, Position.Top);
+        this._toastService.showSuccess(res.message  );
         this.getResidentWithHomes();
         this.modal.dismiss();
       },
       error:(err)=>{
-        this._toastService.showError(err.error.message, Position.Top);
+        this._toastService.showError(err.error.message  );
       }
     });
   }
@@ -116,23 +116,23 @@ export class EditResidentComponent implements OnInit {
     this._residenceService.deleteResidence(residenceId).subscribe({
       next: (res) => {
         this.getResidentWithHomes();
-        this._toastService.showSuccess(res.message, Position.Top);
+        this._toastService.showSuccess(res.message  );
       },
       error:(err)=>{
-        this._toastService.showError(err.error.message, Position.Top);
+        this._toastService.showError(err.error.message  );
       }
     });
   }
 
   private setMainResidence(residenceId:number) {
 
-    this._residenceService.setMainResidence(residenceId).subscribe({
+    this._residenceService.setMainResidence(residenceId, this.userData.id).subscribe({
       next: (res) => {
         this.getResidentWithHomes();
-        this._toastService.showSuccess(res.message, Position.Top);
+        this._toastService.showSuccess(res.message  );
       },
       error:(err)=>{
-        this._toastService.showError(err.error.message, Position.Top);
+        this._toastService.showError(err.error.message  );
       }
     });
   }
@@ -145,19 +145,19 @@ export class EditResidentComponent implements OnInit {
         ...this.residenceForm.value
       }).subscribe({
       next: (res) => {
-        this._toastService.showSuccess(res.message, Position.Top);
+        this._toastService.showSuccess(res.message  );
         this.getResidentWithHomes();
         this.modal.dismiss();
       },
       error:(err)=>{
-        this._toastService.showError(err.error.message, Position.Top);
+        this._toastService.showError(err.error.message  );
       }
     });
   }
 
   saveChanges(){
     if(!this.residenceForm.valid){
-      this._toastService.showError('Debe llenar todos los campos.', Position.Top);
+      this._toastService.showError('Debe llenar todos los campos.'  );
       return;
     }
 
