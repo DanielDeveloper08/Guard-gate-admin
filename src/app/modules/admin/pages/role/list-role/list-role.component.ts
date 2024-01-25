@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { IGeneralRequestPagination } from 'src/app/shared/interfaces/general.interface';
+import { IGeneralRequestPagination, RoleTypeEnum } from 'src/app/shared/interfaces/general.interface';
 import { IRole } from '../../../interfaces/role.interface';
 import { RoleService } from '../../../services/role.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-role',
@@ -28,7 +27,7 @@ export class ListRoleComponent {
 
     this._roleService.getRoles(queryParams).subscribe({
       next: (res) => {
-        this.roles = res.data.records;
+        this.roles = res.data.records.filter(role => role.name != RoleTypeEnum.ADMIN);
       }
     });
   }
