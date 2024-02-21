@@ -7,14 +7,23 @@ import { IGeneralRequestPagination } from 'src/app/shared/interfaces/general.int
 import { environment } from 'src/environments/environment';
 import { UserService } from '../../../services/user.service';
 import { Position } from 'src/app/shared/interfaces';
-import { IRegisterUserRequest, IUpdateUserRequest, IUser } from '../../../interfaces/user.interface';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  IRegisterUserRequest,
+  IUpdateUserRequest,
+  IUser,
+} from '../../../interfaces/user.interface';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { materialize } from 'rxjs';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
   private _userService = inject(UserService);
@@ -26,32 +35,33 @@ export class UserFormComponent implements OnInit {
 
   id: string;
   editing: boolean;
-  loading:boolean;
+  loading: boolean;
 
   private sub: any;
-  roleOptions:{optionValue:string , optionName:string}[];
-  nameRegex:string='^[a-zA-Z]+(?:\\s[a-zA-Z]+)*\\s?$';
-  fullEmailRegex:string='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
-  passwordRegex:string='^(?=.*[!@#$%^&*()_+{}:;<>,.?~-])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
+  roleOptions: { optionValue: string; optionName: string }[];
+  nameRegex: string = '^[a-zA-Z]+(?:\\s[a-zA-Z]+)*\\s?$';
+  fullEmailRegex: string = '^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$';
+  passwordRegex: string =
+    '^(?=.*[!@#$%^&*()_+{}:;<>,.?~-])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$';
 
-  constructor(private route: ActivatedRoute, private router:Router) {
-    this.id='';
-    this.editing=false;
-    this.loading=true;
-    this.roleOptions=[];
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.id = '';
+    this.editing = false;
+    this.loading = true;
+    this.roleOptions = [];
   }
 
   ngOnInit() {
     this.createForm();
     this.getRoles();
-    this.sub = this.route.params.subscribe(params => {
-       this.id = params['id'];
-       if(this.id){
-          this.editing=true;
-          this.getUser();
-       }else{
-        this.loading=false;
-       }
+    this.sub = this.route.params.subscribe((params) => {
+      this.id = params['id'];
+      if (this.id) {
+        this.editing = true;
+        this.getUser();
+      } else {
+        this.loading = false;
+      }
     });
   }
   getRoles() {
@@ -61,99 +71,110 @@ export class UserFormComponent implements OnInit {
 
     this._roleService.getRoles(queryParams).subscribe({
       next: (res) => {
-        this.roleOptions = res.data.records.map((role) => (
-          {optionValue:role.id.toString(), optionName:role.name}
-        ));
-      }
+        this.roleOptions = res.data.records.map((role) => ({
+          optionValue: role.id.toString(),
+          optionName: role.name,
+        }));
+      },
     });
   }
 
   getUser() {
     this._userService.getUser(this.id).subscribe({
       next: (res) => {
-        this.loading=false;
+        this.loading = false;
         this.userForm.patchValue(res.data);
         this.userForm.get('password')?.disable();
         this.userForm.get('passwordConfirm')?.disable();
       },
-      error:(err)=>{
-        this.router.navigate(['/admin/users'])
-      }
+      error: (err) => {
+        this.router.navigate(['/admin/users']);
+      },
     });
   }
 
   public registerUser() {
-    const userFormValues=this.userForm.value;
+    const userFormValues = this.userForm.value;
     delete userFormValues.status;
 
-    this._userService.registerUser(
-      userFormValues
-      ).subscribe({
+    this._userService.registerUser(userFormValues).subscribe({
       next: (res) => {
         this.userForm.patchValue(res.data);
-        this.editing=true;
+        this.editing = true;
         this.userForm.get('password')?.disable();
         this.userForm.get('passwordConfirm')?.disable();
-        this._toastService.showSuccess(res.message  );
+        this._toastService.showSuccess(res.message);
       },
-      error:(err)=>{
-        this._toastService.showError(err.error.message  );
-      }
+      error: (err) => {
+        this._toastService.showError(err.error.message);
+      },
     });
   }
 
   public updateUser() {
-    const userFormValues=this.userForm.value;
+    const userFormValues = this.userForm.value;
 
-    this._userService.updateUser(
-      {
-        id:this.id,
-        ...userFormValues
-      }).subscribe({
-      next: (res) => {
-        this._toastService.showSuccess(res.message  );
-      },
-      error:(err)=>{
-        this._toastService.showError(err.error.message  );
-      }
-    });
+    this._userService
+      .updateUser({
+        id: this.id,
+        ...userFormValues,
+      })
+      .subscribe({
+        next: (res) => {
+          this._toastService.showSuccess(res.message);
+        },
+        error: (err) => {
+          this._toastService.showError(err.error.message);
+        },
+      });
   }
 
-  saveChanges(){
-    if(!this.validateForm()){
+  saveChanges() {
+    if (!this.validateForm()) {
       return;
     }
 
     this.userForm.get('passwordConfirm')?.disable();
 
-    if(this.editing){
+    if (this.editing) {
+      console.log('ENTRO UPDATE');
       this.updateUser();
-    }
-    else{
+    } else {
       this.registerUser();
     }
   }
 
-  validateForm():boolean{
+  validateForm(): boolean {
     const passwordRegExp = new RegExp(this.passwordRegex);
-    if (!passwordRegExp.test(this.userForm.get('password')?.value) && !this.editing) {
-      this._toastService.showError('La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un caracter especial.'  );
+    if (
+      !passwordRegExp.test(this.userForm.get('password')?.value) &&
+      !this.editing
+    ) {
+      this._toastService.showError(
+        'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un caracter especial.'
+      );
       return false;
     }
 
-    if(this.userForm.get('passwordConfirm')?.value!=this.userForm.get('password')?.value && !this.editing){
-      this._toastService.showError('Las contraseñas no coinciden.'  );
+    if (
+      this.userForm.get('passwordConfirm')?.value !=
+        this.userForm.get('password')?.value &&
+      !this.editing
+    ) {
+      this._toastService.showError('Las contraseñas no coinciden.');
       return false;
     }
 
-    if(!this.userForm.valid){
-      this._toastService.showError('Debe llenar todos los campos correctamente.'  );
+    if (!this.userForm.valid) {
+      this._toastService.showError(
+        'Debe llenar todos los campos correctamente.'
+      );
       return false;
     }
 
     const emailRegExp = new RegExp(this.fullEmailRegex);
     if (!emailRegExp.test(this.userForm.get('email')?.value)) {
-      this._toastService.showError('Debe ingresar un email válido.'  );
+      this._toastService.showError('Debe ingresar un email válido.');
       return false;
     }
 
@@ -174,7 +195,7 @@ export class UserFormComponent implements OnInit {
     });
   }
 
-  controlValueChange(formControl: FormControl, controlName:string) {
+  controlValueChange(formControl: FormControl, controlName: string) {
     if (this.userForm.get(controlName) !== formControl) {
       this.userForm.setControl(controlName, formControl);
     }

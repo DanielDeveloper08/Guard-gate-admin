@@ -14,6 +14,7 @@ import { ILoginRequest } from '../../interfaces/auth.interface';
 import { Platform } from '@ionic/angular';
 import { RoleTypeEnum } from 'src/app/shared/interfaces/general.interface';
 import { tap } from 'rxjs';
+import { Position } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -33,8 +34,14 @@ export class LoginComponent implements OnInit {
 
   isMobile: boolean = false;
 
-  constructor(private platform: Platform){
-    this.platform.ready().then(()=>this.isMobile = this.platform.is('android') || this.platform.is('ios'));
+  constructor(private platform: Platform) {
+    this.platform
+      .ready()
+      .then(
+        () =>
+          (this.isMobile =
+            this.platform.is('android') || this.platform.is('ios'))
+      );
   }
 
   ngOnInit() {
@@ -72,16 +79,14 @@ export class LoginComponent implements OnInit {
     } else if (credentials.password === '') {
       this.setFocusPassword = true;
     } else {
-      this._loginService
-      .signIn(credentials)
-      .subscribe({
+      this._loginService.signIn(credentials).subscribe({
         next: (res) => {
           if (res.data.user) {
             const { token, user } = res.data;
 
             if (user.role === RoleTypeEnum.ADMIN) {
-              localStorage.setItem("token", token);
-              localStorage.setItem("user", JSON.stringify(user));
+              localStorage.setItem('token', token);
+              localStorage.setItem('user', JSON.stringify(user));
 
               location.reload();
 
@@ -90,14 +95,13 @@ export class LoginComponent implements OnInit {
 
             this._toastService.showError('Usuario y/o contraseña incorrecta');
 
-
             this.isLoading = false;
           }
         },
-        error: (err:any) => {
+        error: (err: any) => {
           this.isLoading = false;
           this._toastService.showError(err.error.message);
-        }
+        },
       });
     }
   }

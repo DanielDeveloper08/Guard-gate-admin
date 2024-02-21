@@ -18,18 +18,23 @@ export class SelectComponent {
   @Input() startIcon: string = '';
   @Input() endIcon: string = '';
   @Input() setFocus: boolean = false;
-  @Input() value: string="";
+  @Input() value: string = '';
   @Input() disabled: boolean = false;
   @Input() label: string = '';
-  @Input() options: {optionValue:string, optionName:string}[] = [];
+  @Input() options: { optionValue: string; optionName: string }[] = [];
   @Input() labelPosition: string = '';
   @Output() visibilityChanged = new EventEmitter<boolean>();
   @ViewChild('selectTag', { static: false }) inputTag!: IonInput;
-  @Output() controlValueChange: EventEmitter<FormControl> = new EventEmitter<FormControl>();
+  @Output() controlValueChange: EventEmitter<FormControl> =
+    new EventEmitter<FormControl>();
 
   formControl: FormControl = new FormControl('');
 
-  ngOnInit(){
+  ngOnInit() {
+    // this.formControl.valueChanges.subscribe((change) => {
+    //   if (this.value == null) {
+    //   }
+    // });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -38,10 +43,8 @@ export class SelectComponent {
     }
     if (changes['value']) {
       this.value && this.formControl.setValue(this.value);
-
+      this.controlValueChange.emit(this.formControl);
       this.disabled && this.formControl.disable();
-
     }
-
   }
 }
