@@ -37,7 +37,7 @@ export class UrbanizationService {
 
   getUrbanization(): Observable<IGeneralResponse<IUrbanizationResponse>> {
     return this._httpClient.get<IGeneralResponse<IUrbanizationResponse>>(
-      `${this.urlBase}/urbanization`
+      `${this.urlBase}/urbanization/1`
     );
   }
 }

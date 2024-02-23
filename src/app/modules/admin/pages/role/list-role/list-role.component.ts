@@ -13,6 +13,8 @@ import {
 } from '@angular/forms';
 import { UrbanizationService } from '../../../services/urbanization.service';
 import { IUrbanization } from '../../../interfaces/urbanization.interface';
+import { ToastService } from 'src/app/shared/services';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-role',
@@ -24,6 +26,8 @@ export class ListRoleComponent {
   private _roleService = inject(RoleService);
   private _urbanizationService = inject(UrbanizationService);
   private _formBuilder = inject(FormBuilder);
+  private _toastService = inject(ToastService);
+
   urbanizationForm!: FormGroup;
   urbanizationData!: IUrbanization;
 
@@ -32,7 +36,6 @@ export class ListRoleComponent {
   }
 
   ngOnInit() {
-    this.getUrbanization();
     this.getRoles();
   }
 
@@ -47,12 +50,22 @@ export class ListRoleComponent {
     const queryParams: IGeneralRequestPagination = {
       limit: 1000,
     };
+    const combinedObservables = forkJoin({
+      obs1: this._roleService.getRoles(queryParams),
+      obs2: this._urbanizationService.getUrbanization(),
+    });
 
-    this._roleService.getRoles(queryParams).subscribe({
+    combinedObservables.subscribe({
       next: (res) => {
-        this.roles = res.data.records.filter(
+        this.roles = res.obs1.data.records.filter(
           (role) => role.name != RoleTypeEnum.ADMIN
         );
+
+        this.urbanizationData = {
+          address: res.obs2.data.address,
+          name: res.obs2.data.name,
+        };
+        this.createForm();
       },
     });
   }
@@ -69,7 +82,10 @@ export class ListRoleComponent {
         .editarUrbanization(this.urbanizationForm.value)
         .subscribe({
           next: (res) => {
-            console.log('res', res);
+            this._toastService.showSuccess(res.message);
+          },
+          error: (err) => {
+            this._toastService.showError(err.error.message);
           },
         });
 
@@ -79,21 +95,11 @@ export class ListRoleComponent {
       .saveUrbanization(this.urbanizationForm.value)
       .subscribe({
         next: (res) => {
-          console.log('res', res);
+          this._toastService.showSuccess(res.message);
+        },
+        error: (err) => {
+          this._toastService.showError(err.error.message);
         },
       });
-  }
-
-  getUrbanization() {
-    this._urbanizationService.getUrbanization().subscribe({
-      next: (res) => {
-        console.log('res', res);
-        this.urbanizationData = {
-          address: res.data.address,
-          name: res.data.name,
-        };
-        this.createForm();
-      },
-    });
   }
 }

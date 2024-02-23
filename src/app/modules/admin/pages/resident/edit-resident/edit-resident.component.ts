@@ -52,6 +52,10 @@ export class EditResidentComponent implements OnInit {
     });
 
     this.getResidentWithHomes();
+
+    this.modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned == null) return;
+    });
   }
 
   getResidentWithHomes() {

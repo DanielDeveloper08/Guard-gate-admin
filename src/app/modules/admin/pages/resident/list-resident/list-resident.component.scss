@@ -16,7 +16,8 @@ tr{
         font-weight: 600;
         margin: 0 1rem;
         border-radius: 1rem;
-        padding: .5rem 0;
+        padding: .5rem .5rem;
         cursor: pointer;
+        min-width: max-content;
     }
 }

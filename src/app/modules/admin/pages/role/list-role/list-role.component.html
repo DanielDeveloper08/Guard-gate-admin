@@ -33,7 +33,7 @@
         [minlength]="1"
         label="Nombre"
         labelPosition="floating"
-        [value]="urbanizationForm.get('name')?.value"
+        [value]="urbanizationForm?.get('name')?.value"
         (controlValueChange)="controlValueChange($event, 'name')"
       ></shared-input>
     </div>
@@ -45,7 +45,7 @@
         [minlength]="1"
         label="Dirección"
         labelPosition="floating"
-        [value]="urbanizationForm.get('address')?.value"
+        [value]="urbanizationForm?.get('address')?.value"
         (controlValueChange)="controlValueChange($event, 'address')"
       ></shared-input>
 
