@@ -86,13 +86,13 @@ ion-grid{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     --background: transparent;
     display: flex;
     width: 100%;
     height: 100%;
     min-height: 9rem;
-    
+
     ion-icon{
         color:gray;
         font-size: 5rem;
@@ -104,7 +104,7 @@ ion-grid{
 
 .actions-container{
     display: flex;
-    justify-content: end;
+    justify-content: space-around;
     margin-top: 1rem;
     ion-button{
         margin-right: 0.25rem;
@@ -118,5 +118,6 @@ ion-grid{
 
 #residence-modal{
     border-radius: 36rem;
+    height: auto;
 }
 

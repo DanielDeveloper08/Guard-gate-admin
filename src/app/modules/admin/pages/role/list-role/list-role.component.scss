@@ -2,3 +2,19 @@ ion-toolbar {
     padding: 1rem;
     padding-bottom: 0;
 }
+
+.container{
+    display: flex;
+    gap: 2rem;
+}
+
+.input-urbanizacion{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-address{
+    display: flex;
+    flex-direction: column;
+}

@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
       { id: 2, name: 'Dashboard Visitas', route: '/admin/visit-dashboard' },
       { id: 3, name: 'Usuarios', route: '/admin/users' },
       { id: 4, name: 'Residentes', route: '/admin/residents' },
-      { id: 1, name: 'Roles', route: '/admin/roles' },
+      { id: 1, name: 'Configuración', route: '/admin/roles' },
     ];
   }
 

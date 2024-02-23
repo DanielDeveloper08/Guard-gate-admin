@@ -4,7 +4,7 @@ import { ButtonStyle } from '../../interfaces/general.interface';
 @Component({
   selector: 'shared-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
   @Input() label!: string;
@@ -12,11 +12,11 @@ export class ButtonComponent implements OnInit {
   @Input() disabled: boolean = false;
   @Input() icon!: string;
   @Input() style: ButtonStyle = ButtonStyle.Primary;
+  @Input() type: string = 'button';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   getButtonStyleClass(): string {
     return `${this.style}`;

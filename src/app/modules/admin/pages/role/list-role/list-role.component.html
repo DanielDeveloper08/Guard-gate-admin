@@ -1,16 +1,55 @@
-<div class=" small-form-container">
-    <ion-card>
-        <ion-header>
-            <ion-toolbar>
-                <ion-title>Roles</ion-title>
-            </ion-toolbar>
-        </ion-header>
-          
-        <ion-list>
-            <ion-item *ngFor="let role of roles">
-                {{ role.name | camelCase }}
-                <ion-icon name="create-outline" slot="end" [routerLink]="['/admin/edit-role',role.name]"></ion-icon>
-            </ion-item>
-        </ion-list>
-    </ion-card>
+<div class="small-form-container container">
+  <ion-card>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Roles</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-list>
+      <ion-item *ngFor="let role of roles">
+        {{ role.name | camelCase }}
+        <ion-icon
+          style="cursor: pointer"
+          name="create-outline"
+          slot="end"
+          [routerLink]="['/admin/edit-role', role.name]"
+        ></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-card>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Datos de la urbanización</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div class="input-urbanizacion">
+      <shared-input
+        [type]="'text'"
+        [pattern]="'^[a-zA-Z0-9 ]*$'"
+        [maxlength]="50"
+        [minlength]="1"
+        label="Nombre"
+        labelPosition="floating"
+        [value]="urbanizationForm.get('name')?.value"
+        (controlValueChange)="controlValueChange($event, 'name')"
+      ></shared-input>
+    </div>
+    <div class="input-address">
+      <shared-input
+        [type]="'text'"
+        [pattern]="'^[a-zA-Z0-9 ]*$'"
+        [maxlength]="50"
+        [minlength]="1"
+        label="Dirección"
+        labelPosition="floating"
+        [value]="urbanizationForm.get('address')?.value"
+        (controlValueChange)="controlValueChange($event, 'address')"
+      ></shared-input>
+
+      <ion-button slot="end" (click)="saveUrbanization()">Guardar</ion-button>
+    </div>
+  </ion-card>
 </div>

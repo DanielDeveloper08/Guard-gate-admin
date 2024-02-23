@@ -1,11 +1,15 @@
 <ion-content [fullscreen]="true" class="login-container">
   <img src="assets/urbanizacionBg.jpg" alt="Fondo" class="background-image" />
   <shared-loading-splash *ngIf="isLoading"></shared-loading-splash>
-  <div [class]="'ion-padding ' + (isMobile ? 'content-login':'content-login-web')">
+  <div
+    [class]="
+      'ion-padding ' + (isMobile ? 'content-login' : 'content-login-web')
+    "
+  >
     <div class="logo">
       <img src="assets/logo-color.svg" alt="logo" />
     </div>
-    <form class="form-credentials" [formGroup]="signInForm">
+    <form class="form-credentials" [formGroup]="signInForm" (submit)="signIn()">
       <!-- INPUT USERNAME -->
       <shared-input
         [startIcon]="'person-outline'"
@@ -32,8 +36,10 @@
 
       <div class="btn-iniciar-sesion">
         <shared-button
+          [type]="'submit'"
           [label]="'Iniciar sesión'"
-          (click)="signIn()">
+          (click)="signIn()"
+        >
         </shared-button>
       </div>
       <div class="forgot-password">
